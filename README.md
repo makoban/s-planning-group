@@ -34,9 +34,11 @@ Open `http://127.0.0.1:4173/`.
 - `hero-*`: S.PLANNING GROUPの4領域をつなぐヒーローイメージ（GPT Image生成）
 - `materials.*`: 技術・素材・通信・暮らしの連携イメージ（GPT Image生成）
 - `stockmart.*`: 食と暮らしの小売体験イメージ（GPT Image生成）
+- `company-seiryu.*` / `company-shinko.*` / `company-itn.*`: 各グループ会社の事業内容を表現したビジュアル（GPT Image生成）
+- `group-site-*`: 青竜社塗装店の現行公式サイトと、伸晃工業・アイ・ティー・ネットのリニューアル提案サイトを1440×900で取得したトップ画面。サイト上では軽量サムネイルを表示し、タップで拡大できます。
 - `assets/logo-mark-card.png`: 支給名刺写真の印刷マークから輪郭を抽出し、背景を透過したサイト用シンボル。形状は生成せず名刺の4パーツをそのまま使用し、表示色のみサイトの赤・黒へ統一しています。正式公開時は支給された正規ロゴ原版に差し替えます。
 - `assets/favicon-32.png` / `assets/apple-touch-icon.png`: 同じ名刺由来シンボルから生成したブラウザ・ホーム画面用アイコンです。
 
 ## Browser support
 
-最新のChrome / Safari / Firefox / Edgeを対象にしています。`prefers-reduced-motion` ではローダー、パララックス、接続線描画などを停止し、全コンテンツを初期表示します。
+最新のChrome / Safari / Firefox / Edgeを対象にしています。会社紹介画像にはスクロール連動の微細な奥行き、デスクトップのポインター操作には控えめな傾きを加えています。`prefers-reduced-motion` ではローダー、パララックス、傾き、接続線描画などを停止し、全コンテンツを初期表示します。
