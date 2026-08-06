@@ -1645,7 +1645,7 @@ body.is-loaded .hero-actions {
 
 .vision-card h2 {
   margin: 42px 0 34px;
-  font-size: 61px;
+  font-size: 56px;
   font-weight: 900;
 }
 
@@ -2154,6 +2154,20 @@ body.is-loaded .hero-actions {
 }
 
 @media (max-width: 1024px) {
+  .story-grid,
+  .section-heading {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .section-intro {
+    min-width: 0;
+  }
+
+  .story-body {
+    margin-left: 0;
+  }
+
   .core-business {
     grid-template-columns: 60px minmax(0, 1fr);
   }
@@ -2175,6 +2189,14 @@ body.is-loaded .hero-actions {
     right: 35px;
     bottom: 28px;
     opacity: 0.22;
+  }
+
+  .stockmart-feature {
+    grid-template-columns: 1fr;
+  }
+
+  .feature-media {
+    min-height: 550px;
   }
 
   .contact-grid {
@@ -2847,6 +2869,10 @@ body.is-loaded .hero-actions {
   }
 
   .display-title {
+    font-size: 26px;
+  }
+
+  .core-business h3 {
     font-size: 26px;
   }
 
