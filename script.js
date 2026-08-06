@@ -104,7 +104,7 @@
     splanning: {
       type: "GROUP CORE",
       name: "エス・プランニング株式会社",
-      copy: "現場にある可能性を事業へ。ものづくりを原点に、自社事業と専門会社の未来をつなぐグループの中心です。",
+      copy: ["現場にある可能性を事業へ。", "ものづくりを原点に、", "自社事業と専門会社の未来をつなぐ", "グループの中心です。"],
       href: "#business",
       label: "事業を見る",
       external: false,
@@ -112,7 +112,7 @@
     stockmart: {
       type: "OUR BUSINESS / RETAIL",
       name: "stockmart",
-      copy: "輸入食品・生活雑貨を中心に、必要な分だけ選べる買い物体験を届ける、エス・プランニングの小売事業です。",
+      copy: ["輸入食品・生活雑貨を中心に、", "必要な分だけ選べる買い物体験を届ける、", "エス・プランニングの小売事業です。"],
       href: "#stockmart",
       label: "事業を見る",
       external: false,
@@ -120,7 +120,7 @@
     seiryu: {
       type: "GROUP COMPANY / BUILDING",
       name: "有限会社青竜社塗装店",
-      copy: "建築塗装、防水、修繕工事を通じて、地域の建物と暮らしを長く支える専門会社です。",
+      copy: ["建築塗装、防水、修繕工事を通じて、", "地域の建物と暮らしを長く支える", "専門会社です。"],
       href: "https://www.seiryu-sha.co.jp/",
       label: "公式サイト",
       external: true,
@@ -128,7 +128,7 @@
     shinko: {
       type: "GROUP COMPANY / INDUSTRIAL",
       name: "伸晃工業株式会社",
-      copy: "多様な素材への工業塗装・表面処理を担い、製品の色、質感、その先の品質をつくる専門会社です。",
+      copy: ["多様な素材への工業塗装・表面処理を担い、", "製品の色、質感、その先の品質をつくる", "専門会社です。"],
       href: "https://makoban.github.io/shinko-kogyo-site/",
       label: "サイト提案を見る",
       external: true,
@@ -136,7 +136,7 @@
     itn: {
       type: "GROUP COMPANY / COMMUNICATION",
       name: "有限会社アイ・ティー・ネット",
-      copy: "アンテナ、防犯、LAN・ネットワークなど、暮らしと仕事の見えないつながりを支える専門会社です。",
+      copy: ["アンテナ、防犯、LAN・ネットワークなど、", "暮らしと仕事の見えないつながりを支える", "専門会社です。"],
       href: "https://makoban.github.io/it-network-renewal/",
       label: "サイト提案を見る",
       external: true,
@@ -148,6 +148,17 @@
   const detailName = document.querySelector("[data-group-name]");
   const detailCopy = document.querySelector("[data-group-copy]");
   const detailLink = document.querySelector("[data-group-link]");
+
+  const renderPhrases = (element, phrases) => {
+    element.replaceChildren();
+    phrases.forEach((phrase, index) => {
+      if (index > 0) element.append(document.createElement("wbr"));
+      const span = document.createElement("span");
+      span.className = "phrase";
+      span.textContent = phrase;
+      element.append(span);
+    });
+  };
 
   groupNodes.forEach((node) => {
     node.addEventListener("click", () => {
@@ -162,7 +173,7 @@
 
       detailType.textContent = data.type;
       detailName.textContent = data.name;
-      detailCopy.textContent = data.copy;
+      renderPhrases(detailCopy, data.copy);
       detailLink.href = data.href;
       detailLink.innerHTML = `${data.label} <span aria-hidden="true">${data.external ? "↗" : "→"}</span>`;
 
@@ -206,6 +217,29 @@
   dialog?.addEventListener("click", (event) => {
     if (event.target === dialog) dialog.close();
   });
+
+  const imageDialog = document.querySelector("#image-dialog");
+  const imageDialogImage = document.querySelector("[data-image-dialog-image]");
+  const imageDialogCaption = document.querySelector("[data-image-dialog-caption]");
+  const imageDialogClose = document.querySelector("[data-image-dialog-close]");
+  let imageDialogTrigger = null;
+
+  document.querySelectorAll("[data-image-zoom]").forEach((trigger) => {
+    trigger.addEventListener("click", () => {
+      if (!(imageDialog instanceof HTMLDialogElement) || !(imageDialogImage instanceof HTMLImageElement)) return;
+      imageDialogTrigger = trigger;
+      imageDialogImage.src = trigger.dataset.imageSrc || "";
+      imageDialogImage.alt = trigger.dataset.imageAlt || "";
+      if (imageDialogCaption) imageDialogCaption.textContent = trigger.dataset.imageCaption || "";
+      imageDialog.showModal();
+    });
+  });
+
+  imageDialogClose?.addEventListener("click", () => imageDialog?.close());
+  imageDialog?.addEventListener("click", (event) => {
+    if (event.target === imageDialog) imageDialog.close();
+  });
+  imageDialog?.addEventListener("close", () => imageDialogTrigger?.focus());
 
   document.querySelectorAll("[data-year]").forEach((item) => {
     item.textContent = String(new Date().getFullYear());
