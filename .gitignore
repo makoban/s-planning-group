@@ -1,4 +1,4 @@
 assets/images/*-source.png
 .DS_Store
-qa/
+qa/artifacts/
 node_modules/
