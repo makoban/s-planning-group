@@ -34,7 +34,8 @@ Open `http://127.0.0.1:4173/`.
 - `hero-*`: S.PLANNING GROUPの4領域をつなぐヒーローイメージ（GPT Image生成）
 - `materials.*`: 技術・素材・通信・暮らしの連携イメージ（GPT Image生成）
 - `stockmart.*`: 食と暮らしの小売体験イメージ（GPT Image生成）
-- `assets/logo-mark.svg`: 支給名刺の意匠を参照した提案用ベクターマーク。正式公開時は支給された正規ロゴデータに差し替えます。
+- `assets/logo-mark-card.png`: 支給名刺写真の印刷マークから輪郭を抽出し、背景を透過したサイト用シンボル。形状は生成せず名刺の4パーツをそのまま使用し、表示色のみサイトの赤・黒へ統一しています。正式公開時は支給された正規ロゴ原版に差し替えます。
+- `assets/favicon-32.png` / `assets/apple-touch-icon.png`: 同じ名刺由来シンボルから生成したブラウザ・ホーム画面用アイコンです。
 
 ## Browser support
 

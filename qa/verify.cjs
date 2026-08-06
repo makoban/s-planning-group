@@ -8,6 +8,7 @@ const projectDir = path.resolve(__dirname, "..");
 const outputDir = path.join(projectDir, "qa", "artifacts");
 const url = process.env.QA_URL || "http://127.0.0.1:4173/";
 const widths = [320, 360, 375, 390, 393, 412, 430, 768, 920, 921, 960, 1024, 1440];
+const expectedLogoSource = "assets/logo-mark-card.png";
 
 fs.mkdirSync(outputDir, { recursive: true });
 
@@ -115,6 +116,10 @@ for (const width of widths) {
         const loader = document.querySelector(".page-loader");
         return loader ? getComputedStyle(loader).visibility !== "hidden" : false;
       })(),
+      logoSources: allImages
+        .filter((image) => image.getAttribute("src")?.includes("logo-mark"))
+        .map((image) => image.getAttribute("src")),
+      legacyLoaderPieces: document.querySelectorAll(".loader-piece").length,
       noindex: document.querySelector('meta[name="robots"]')?.content || "",
       imageFormats: [...new Set(allImages.map((image) => image.currentSrc.split(".").pop()))],
       resources,
@@ -137,6 +142,10 @@ for (const width of widths) {
   if (metrics.internalTargets.length) report.failures.push(`${width}px: missing anchors ${metrics.internalTargets.join(", ")}`);
   if (metrics.protectedPhraseFailures.length) report.failures.push(`${width}px: protected phrase failures ${JSON.stringify(metrics.protectedPhraseFailures)}`);
   if (metrics.forcedBreaks !== 0) report.failures.push(`${width}px: ${metrics.forcedBreaks} forced br elements remain`);
+  if (metrics.logoSources.length !== 4 || metrics.logoSources.some((source) => source !== expectedLogoSource)) {
+    report.failures.push(`${width}px: logo sources are not unified ${JSON.stringify(metrics.logoSources)}`);
+  }
+  if (metrics.legacyLoaderPieces !== 0) report.failures.push(`${width}px: legacy loader logo pieces remain`);
   if (consoleErrors.length || pageErrors.length) report.failures.push(`${width}px: browser errors`);
   if (metrics.hiddenReveals !== 0) report.failures.push(`${width}px: ${metrics.hiddenReveals} reveal elements stayed hidden`);
 
