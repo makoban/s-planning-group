@@ -40,6 +40,9 @@ body {
   line-height: 1.8;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+  line-break: strict;
+  word-break: normal;
+  overflow-wrap: normal;
 }
 
 body.menu-open {
@@ -51,6 +54,12 @@ picture,
 svg {
   display: block;
   max-width: 100%;
+}
+
+img,
+video,
+svg {
+  height: auto;
 }
 
 button,
@@ -81,6 +90,61 @@ h2,
 h3 {
   line-height: 1.25;
   line-break: strict;
+  word-break: normal;
+  overflow-wrap: normal;
+  text-wrap: balance;
+}
+
+p,
+li,
+dt,
+dd,
+label,
+a,
+button,
+figcaption {
+  line-break: strict;
+  word-break: normal;
+  overflow-wrap: normal;
+}
+
+p,
+li,
+dd,
+figcaption {
+  text-wrap: pretty;
+}
+
+.keep,
+.phrase,
+.phrase-line,
+.company-name {
+  max-width: 100%;
+  white-space: nowrap;
+}
+
+.keep,
+.phrase,
+.company-name {
+  display: inline-block;
+}
+
+.phrase-line {
+  display: block;
+  width: max-content;
+}
+
+.shell > *,
+.story-grid > *,
+.section-heading > *,
+.group-detail > *,
+.core-business > *,
+.stockmart-feature > *,
+.company-card > *,
+.profile-grid > *,
+.contact-grid > *,
+.form-row > * {
+  min-width: 0;
 }
 
 ::selection {
@@ -276,6 +340,7 @@ body.is-loaded .page-loader {
   font-weight: 800;
   letter-spacing: 0.04em;
   line-height: 1.1;
+  white-space: nowrap;
 }
 
 .brand-type strong i,
@@ -289,6 +354,7 @@ body.is-loaded .page-loader {
   font-size: 9px;
   font-weight: 700;
   line-height: 1.2;
+  white-space: nowrap;
 }
 
 .desktop-nav {
@@ -303,6 +369,7 @@ body.is-loaded .page-loader {
   font-size: 12px;
   font-weight: 700;
   text-decoration: none;
+  white-space: nowrap;
 }
 
 .desktop-nav a::after {
@@ -354,6 +421,7 @@ body.is-loaded .page-loader {
   font-size: 12px;
   font-weight: 700;
   text-decoration: none;
+  white-space: nowrap;
   transition: background 0.3s ease, transform 0.3s var(--ease);
 }
 
@@ -552,6 +620,7 @@ body.is-loaded .hero-eyebrow {
 
 .headline-line .phrase {
   display: inline-block;
+  white-space: nowrap;
 }
 
 .headline-line {
@@ -620,6 +689,14 @@ body.is-loaded .hero-actions {
   text-decoration: none;
   cursor: pointer;
   transition: color 0.35s ease, background 0.35s ease, border-color 0.35s ease, transform 0.35s var(--ease);
+}
+
+.button > span,
+.text-link,
+.source-link,
+.footer-links a,
+.contact-phone a {
+  white-space: nowrap;
 }
 
 .button i {
@@ -730,6 +807,46 @@ body.is-loaded .hero-actions {
   background: rgba(21, 20, 25, 0.56);
   font-size: 8px;
   line-height: 1.4;
+  white-space: nowrap;
+}
+
+.media-zoom {
+  position: absolute;
+  z-index: 4;
+  bottom: 14px;
+  left: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 42px;
+  padding: 7px 8px 7px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  color: var(--white);
+  background: rgba(21, 20, 25, 0.7);
+  border-radius: 999px;
+  box-shadow: 0 8px 26px rgba(21, 20, 25, 0.18);
+  backdrop-filter: blur(10px);
+  cursor: zoom-in;
+}
+
+.media-zoom span {
+  font-size: 10px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.media-zoom i {
+  display: grid;
+  place-items: center;
+  width: 27px;
+  height: 27px;
+  color: var(--ink);
+  background: var(--white);
+  border-radius: 50%;
+  font-family: var(--font-en);
+  font-size: 16px;
+  font-style: normal;
+  line-height: 1;
 }
 
 .hero-note {
@@ -1415,6 +1532,18 @@ body.is-loaded .hero-actions {
   font-weight: 900;
 }
 
+.company-name-short {
+  font-size: 46px;
+}
+
+.company-name-medium {
+  font-size: 42px;
+}
+
+.company-name-long {
+  font-size: 29px;
+}
+
 .company-main > p:last-child {
   margin: 0;
   font-size: 15px;
@@ -1859,6 +1988,50 @@ body.is-loaded .hero-actions {
   box-shadow: 0 30px 90px rgba(21, 20, 25, 0.28);
 }
 
+.image-dialog {
+  width: min(1080px, calc(100% - 32px));
+  max-height: calc(100dvh - 32px);
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: 22px;
+  color: var(--white);
+  background: #0d0d10;
+  box-shadow: 0 30px 100px rgba(0, 0, 0, 0.44);
+}
+
+.image-dialog::backdrop {
+  background: rgba(8, 8, 10, 0.84);
+  backdrop-filter: blur(9px);
+}
+
+.image-dialog figure {
+  display: grid;
+  margin: 0;
+  max-height: calc(100dvh - 32px);
+}
+
+.image-dialog img {
+  width: 100%;
+  max-height: calc(100dvh - 94px);
+  object-fit: contain;
+  background: #0d0d10;
+}
+
+.image-dialog figcaption {
+  margin: 0;
+  padding: 15px 62px 16px 18px;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 11px;
+}
+
+.image-dialog-close {
+  z-index: 2;
+  border-color: rgba(255, 255, 255, 0.4);
+  color: var(--white);
+  background: rgba(21, 20, 25, 0.66);
+}
+
 .demo-dialog::backdrop {
   background: rgba(21, 20, 25, 0.66);
   backdrop-filter: blur(7px);
@@ -1959,12 +2132,53 @@ body.is-loaded .hero-actions {
     font-size: 42px;
   }
 
+  .company-name-short {
+    font-size: 36px;
+  }
+
+  .company-name-medium {
+    font-size: 31px;
+  }
+
+  .company-name-long {
+    font-size: 22px;
+  }
+
   .vision-card h2 {
     font-size: 52px;
   }
 
   .contact-copy h2 {
     font-size: 54px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .core-business {
+    grid-template-columns: 60px minmax(0, 1fr);
+  }
+
+  .core-business > p {
+    grid-column: 2;
+  }
+
+  .company-card {
+    grid-template-columns: 72px minmax(0, 1fr);
+  }
+
+  .company-meta {
+    grid-column: 2;
+  }
+
+  .company-symbol {
+    position: absolute;
+    right: 35px;
+    bottom: 28px;
+    opacity: 0.22;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -2236,7 +2450,7 @@ body.is-loaded .hero-actions {
 
   .hero h1 {
     margin-bottom: 26px;
-    font-size: 43px;
+    font-size: 36px;
     line-height: 1.18;
   }
 
@@ -2298,7 +2512,7 @@ body.is-loaded .hero-actions {
   }
 
   .display-title {
-    font-size: 44px;
+    font-size: 26px;
     line-height: 1.3;
   }
 
@@ -2341,7 +2555,7 @@ body.is-loaded .hero-actions {
   }
 
   .core-business h3 {
-    font-size: 35px;
+    font-size: 28px;
   }
 
   .core-business > p {
@@ -2359,7 +2573,7 @@ body.is-loaded .hero-actions {
   }
 
   .feature-media {
-    min-height: 410px;
+    min-height: clamp(260px, 78vw, 330px);
   }
 
   .feature-copy {
@@ -2371,7 +2585,7 @@ body.is-loaded .hero-actions {
   }
 
   .feature-copy h3 {
-    font-size: 36px;
+    font-size: 28px;
   }
 
   .feature-copy > p {
@@ -2413,6 +2627,18 @@ body.is-loaded .hero-actions {
     font-size: 36px;
   }
 
+  .company-name-short {
+    font-size: 26px;
+  }
+
+  .company-name-medium {
+    font-size: 23px;
+  }
+
+  .company-name-long {
+    font-size: 17px;
+  }
+
   .company-main > p:last-child {
     font-size: 14px;
   }
@@ -2440,7 +2666,7 @@ body.is-loaded .hero-actions {
 
   .vision-media {
     position: relative;
-    min-height: 470px;
+    min-height: clamp(250px, 72vw, 320px);
   }
 
   .vision-card {
@@ -2452,7 +2678,7 @@ body.is-loaded .hero-actions {
 
   .vision-card h2 {
     margin-top: 32px;
-    font-size: 39px;
+    font-size: 24px;
   }
 
   .profile-brand img {
@@ -2471,7 +2697,7 @@ body.is-loaded .hero-actions {
 
   .contact-copy h2 {
     margin-top: 35px;
-    font-size: 45px;
+    font-size: 31px;
   }
 
   .contact-phone {
@@ -2509,8 +2735,94 @@ body.is-loaded .hero-actions {
   }
 
   .demo-dialog h2 {
-    font-size: 32px;
+    font-size: 18px;
   }
+
+  .media-zoom {
+    bottom: 10px;
+    left: 10px;
+  }
+
+  .image-note {
+    right: 10px;
+    bottom: 10px;
+  }
+
+  .feature-media .image-note,
+  .vision-media .image-note {
+    display: none;
+  }
+
+  .image-dialog {
+    width: calc(100% - 20px);
+    max-height: calc(100dvh - 20px);
+    border-radius: 16px;
+  }
+
+  .image-dialog figure {
+    max-height: calc(100dvh - 20px);
+  }
+
+  .image-dialog img {
+    max-height: calc(100dvh - 82px);
+  }
+
+  .image-dialog figcaption {
+    padding: 13px 54px 14px 14px;
+    font-size: 10px;
+  }
+}
+
+@media (min-width: 361px) and (max-width: 390px) {
+  .hero h1 { font-size: 38px; }
+  .display-title { font-size: 29px; }
+  .core-business h3,
+  .feature-copy h3 { font-size: 30px; }
+  .company-name-short { font-size: 30px; }
+  .company-name-medium { font-size: 26px; }
+  .company-name-long { font-size: 19px; }
+  .vision-card h2 { font-size: 26px; }
+  .contact-copy h2 { font-size: 34px; }
+  .demo-dialog h2 { font-size: 22px; }
+}
+
+@media (min-width: 391px) and (max-width: 479px) {
+  .hero h1 { font-size: 40px; }
+  .display-title { font-size: 32px; }
+  .core-business h3,
+  .feature-copy h3 { font-size: 32px; }
+  .company-name-short { font-size: 32px; }
+  .company-name-medium { font-size: 28px; }
+  .company-name-long { font-size: 21px; }
+  .vision-card h2 { font-size: 28px; }
+  .contact-copy h2 { font-size: 36px; }
+  .demo-dialog h2 { font-size: 24px; }
+}
+
+@media (min-width: 480px) and (max-width: 599px) {
+  .hero h1 { font-size: 43px; }
+  .display-title { font-size: 38px; }
+  .core-business h3,
+  .feature-copy h3 { font-size: 35px; }
+  .company-name-short { font-size: 36px; }
+  .company-name-medium { font-size: 34px; }
+  .company-name-long { font-size: 25px; }
+  .vision-card h2 { font-size: 34px; }
+  .contact-copy h2 { font-size: 42px; }
+  .demo-dialog h2 { font-size: 30px; }
+}
+
+@media (min-width: 600px) and (max-width: 767px) {
+  .hero h1 { font-size: 43px; }
+  .display-title { font-size: 44px; }
+  .core-business h3 { font-size: 35px; }
+  .feature-copy h3 { font-size: 36px; }
+  .company-name-short { font-size: 36px; }
+  .company-name-medium { font-size: 34px; }
+  .company-name-long { font-size: 27px; }
+  .vision-card h2 { font-size: 39px; }
+  .contact-copy h2 { font-size: 45px; }
+  .demo-dialog h2 { font-size: 32px; }
 }
 
 @media (max-width: 360px) {
@@ -2535,7 +2847,7 @@ body.is-loaded .hero-actions {
   }
 
   .display-title {
-    font-size: 36px;
+    font-size: 26px;
   }
 
   .contact-phone a {

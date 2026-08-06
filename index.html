@@ -85,6 +85,7 @@
           <picture>
             <source media="(max-width: 767px)" type="image/avif" srcset="assets/images/hero-mobile.avif" />
             <source media="(max-width: 767px)" type="image/webp" srcset="assets/images/hero-mobile.webp" />
+            <source media="(max-width: 767px)" srcset="assets/images/hero-mobile.jpg" />
             <source type="image/avif" srcset="assets/images/hero-1280.avif 1280w, assets/images/hero-1672.avif 1672w" />
             <source type="image/webp" srcset="assets/images/hero-1280.webp 1280w, assets/images/hero-1672.webp 1672w" />
             <img
@@ -95,6 +96,7 @@
               height="941"
               alt="横浜の街を望む明るい空間で、異なる領域の専門家が未来の仕事を話し合うイメージ"
               fetchpriority="high"
+              decoding="async"
             />
           </picture>
           <div class="hero-shade"></div>
@@ -108,9 +110,7 @@
             <span class="headline-line"><em><span class="phrase">まだ見ぬ景色を</span><span class="phrase">つくる。</span></em></span>
           </h1>
           <p class="hero-lead">
-            <span>エス・プランニングを中心に、</span>
-            <span>ものづくり、通信、建物、食と暮らしの仕事がつながる。</span>
-            <span>現場で培った力と受け継いだ技術から、次の可能性を育てます。</span>
+            <span class="phrase">エス・プランニングを中心に、</span><wbr /><span class="phrase">ものづくり、通信、建物、</span><wbr /><span class="phrase">食と暮らしの仕事がつながる。</span><wbr /><span class="phrase">現場で培った力と、</span><wbr /><span class="phrase">受け継いだ技術から、</span><wbr /><span class="phrase">次の可能性を育てます。</span>
           </p>
           <div class="hero-actions">
             <a class="button button-primary" href="#group"><span>グループを知る</span><i aria-hidden="true">↗</i></a>
@@ -147,15 +147,15 @@
           </div>
           <div class="story-copy">
             <h2 id="story-title" class="display-title reveal">
-              <span>現場にある可能性を、</span>
-              <span class="accent-text">事業へ。</span>
+              <span class="phrase-line">現場にある可能性を、</span>
+              <span class="phrase-line accent-text">事業へ。</span>
             </h2>
             <div class="story-body reveal">
               <p>
-                2007年、ものづくりの現場から始まったエス・プランニング。目の前の仕事に向き合いながら、溶接、電気、塗装へとできることを広げてきました。
+                <span class="phrase">2007年、</span><wbr /><span class="phrase">ものづくりの現場から始まった</span><wbr /><span class="phrase keep">エス・プランニング。</span><wbr /><span class="phrase">目の前の仕事に向き合いながら、</span><wbr /><span class="phrase">溶接、電気、塗装へと</span><wbr /><span class="phrase">できることを広げてきました。</span>
               </p>
               <p>
-                そして今は、受け継いだ会社の技術と人を大切にしながら、それぞれの専門性が次の挑戦へ向かえるグループを育てています。
+                <span class="phrase">そして今は、</span><wbr /><span class="phrase">受け継いだ会社の技術と人を</span><wbr /><span class="phrase">大切にしながら、</span><wbr /><span class="phrase">それぞれの専門性が</span><wbr /><span class="phrase">次の挑戦へ向かえるグループを</span><wbr /><span class="phrase">育てています。</span>
               </p>
               <a
                 class="source-link"
@@ -184,9 +184,9 @@
             </div>
             <div>
               <h2 id="group-title" class="display-title display-title-light reveal">
-                <span>一つの中心から、</span><span>専門性がひらく。</span>
+                <span class="phrase-line">一つの中心から、</span><span class="phrase-line">専門性がひらく。</span>
               </h2>
-              <p class="heading-lead reveal">エス・プランニングの自社事業と、独自の技術を持つ3つのグループ会社。役割の違いを尊重しながら、未来を見据えます。</p>
+              <p class="heading-lead reveal"><span class="phrase">エス・プランニングの自社事業と、</span><wbr /><span class="phrase">独自の技術を持つ3つのグループ会社。</span><wbr /><span class="phrase">役割の違いを尊重しながら、</span><wbr /><span class="phrase">未来を見据えます。</span></p>
             </div>
           </div>
 
@@ -232,7 +232,7 @@
               <p class="group-detail-type" data-group-type>GROUP CORE</p>
               <h3 data-group-name>エス・プランニング株式会社</h3>
             </div>
-            <p data-group-copy>現場にある可能性を事業へ。ものづくりを原点に、自社事業と専門会社の未来をつなぐグループの中心です。</p>
+            <p data-group-copy><span class="phrase">現場にある可能性を事業へ。</span><wbr /><span class="phrase">ものづくりを原点に、</span><wbr /><span class="phrase">自社事業と専門会社の未来をつなぐ</span><wbr /><span class="phrase">グループの中心です。</span></p>
             <a data-group-link href="#business">詳しく見る <span aria-hidden="true">→</span></a>
           </div>
 
@@ -260,7 +260,7 @@
               <p class="section-number">03</p>
             </div>
             <div>
-              <h2 id="business-title" class="display-title reveal"><span>エス・プランニングが、</span><span>自ら育てる仕事。</span></h2>
+              <h2 id="business-title" class="display-title reveal"><span class="phrase-line">エス・プランニングが、</span><span class="phrase-line">自ら育てる仕事。</span></h2>
             </div>
           </div>
 
@@ -268,33 +268,37 @@
             <div class="core-business-number">01</div>
             <div>
               <p class="card-label">MONOZUKURI SUPPORT</p>
-              <h3>現場の課題に、<br />できることを増やして応える。</h3>
+              <h3><span class="phrase-line">現場の課題に、</span><span class="phrase-line">できる力で応える。</span></h3>
             </div>
-            <p>船舶・鉄道製造の現場を起点に、溶接、電気工事、塗装へ。仕事の境界を決めつけず、現場で必要とされる力を積み重ねてきました。</p>
+            <p><span class="phrase">船舶・鉄道製造の現場を起点に、</span><wbr /><span class="phrase">溶接、電気工事、塗装へ。</span><wbr /><span class="phrase">仕事の境界を決めつけず、</span><wbr /><span class="phrase">現場で必要とされる力を</span><wbr /><span class="phrase">積み重ねてきました。</span></p>
             <span class="core-orbit" aria-hidden="true"></span>
           </article>
 
           <article class="stockmart-feature reveal" id="stockmart">
             <div class="feature-media media-curtain">
               <picture>
-                <source type="image/avif" srcset="assets/images/stockmart.avif" />
-                <source type="image/webp" srcset="assets/images/stockmart.webp" />
+                <source type="image/avif" srcset="assets/images/stockmart-640.avif 640w, assets/images/stockmart.avif 1200w" sizes="(max-width: 920px) calc(100vw - 32px), 53vw" />
+                <source type="image/webp" srcset="assets/images/stockmart-640.webp 640w, assets/images/stockmart.webp 1200w" sizes="(max-width: 920px) calc(100vw - 32px), 53vw" />
                 <img
                   src="assets/images/stockmart.jpg"
+                  srcset="assets/images/stockmart-640.jpg 640w, assets/images/stockmart.jpg 1200w"
+                  sizes="(max-width: 920px) calc(100vw - 32px), 53vw"
                   width="1200"
                   height="900"
                   loading="lazy"
+                  decoding="async"
                   alt="明るい食品と生活雑貨の売場で、商品を選ぶ楽しさを共有するイメージ"
                 />
               </picture>
               <p class="image-note">事業コンセプトを表現した生成イメージです</p>
+              <button class="media-zoom" type="button" data-image-zoom data-image-src="assets/images/stockmart.jpg" data-image-alt="明るい食品と生活雑貨の売場で、商品を選ぶ楽しさを共有するイメージ" data-image-caption="stockmartの事業コンセプトを表現した生成イメージ"><span>画像を拡大</span><i aria-hidden="true">+</i></button>
             </div>
             <div class="feature-copy">
               <p class="card-label">RETAIL BUSINESS / S.PLANNING</p>
               <div class="stockmart-wordmark"><span aria-hidden="true">●</span>stockmart</div>
-              <h3>毎日の買い物に、<br />新しい楽しさを。</h3>
-              <p>輸入食品・生活雑貨を中心に、必要な分だけ選べる買い物体験を届ける小売事業。店舗や催事を通じて、日常に新しい発見とワクワクを生み出します。</p>
-              <div class="classification-note"><strong>会社ではなく、自社運営事業です</strong><span>エス・プランニング株式会社 → 小売事業 stockmart</span></div>
+              <h3><span class="phrase-line">毎日の買い物に、</span><span class="phrase-line">新しい楽しさを。</span></h3>
+              <p><span class="phrase">輸入食品・生活雑貨を中心に、</span><wbr /><span class="phrase">必要な分だけ選べる</span><wbr /><span class="phrase">買い物体験を届ける小売事業。</span><wbr /><span class="phrase">店舗や催事を通じて、</span><wbr /><span class="phrase">日常に新しい発見とワクワクを</span><wbr /><span class="phrase">生み出します。</span></p>
+              <div class="classification-note"><strong class="keep">会社ではなく、自社運営事業です</strong><span><span class="phrase keep">エス・プランニング株式会社</span><wbr /><span class="phrase">→ 小売事業 stockmart</span></span></div>
               <a class="button button-dark" href="https://stockmart-sp.com/" target="_blank" rel="noopener noreferrer"><span>公式サイトを見る</span><i aria-hidden="true">↗</i></a>
             </div>
           </article>
@@ -309,8 +313,8 @@
               <p class="section-number">04</p>
             </div>
             <div>
-              <h2 id="companies-title" class="display-title reveal"><span>受け継いだ専門性を、</span><span>その先の価値へ。</span></h2>
-              <p class="heading-lead reveal">それぞれの名前と仕事に宿る信頼を大切に、3社の技術を次の世代へつないでいきます。</p>
+              <h2 id="companies-title" class="display-title reveal"><span class="phrase-line">受け継いだ専門性を、</span><span class="phrase-line">その先の価値へ。</span></h2>
+              <p class="heading-lead reveal"><span class="phrase">それぞれの名前と仕事に宿る信頼を</span><wbr /><span class="phrase">大切に、</span><wbr /><span class="phrase">3社の技術を次の世代へ</span><wbr /><span class="phrase">つないでいきます。</span></p>
             </div>
           </div>
 
@@ -319,11 +323,11 @@
               <div class="company-index"><span>01</span><small>GROUP COMPANY</small></div>
               <div class="company-main">
                 <p class="company-field">BUILDING / ARCHITECTURAL COATING</p>
-                <h3>有限会社<br />青竜社塗装店</h3>
-                <p>受け継いだ塗装技術で、建物の先を守る。</p>
+                <h3><span class="company-name company-name-medium">有限会社青竜社塗装店</span></h3>
+                <p><span class="phrase">受け継いだ塗装技術で、</span><wbr /><span class="phrase">建物の先を守る。</span></p>
               </div>
               <div class="company-meta">
-                <p>建築塗装、防水、修繕工事。建物と暮らしを長く支える、地域に根ざした専門会社です。</p>
+                <p><span class="phrase">建築塗装、防水、修繕工事。</span><wbr /><span class="phrase">建物と暮らしを長く支える、</span><wbr /><span class="phrase">地域に根ざした専門会社です。</span></p>
                 <a href="https://www.seiryu-sha.co.jp/" target="_blank" rel="noopener noreferrer">公式サイト <span aria-hidden="true">↗</span></a>
               </div>
               <div class="company-symbol symbol-seiryu" aria-hidden="true"><i></i><i></i><i></i></div>
@@ -333,11 +337,11 @@
               <div class="company-index"><span>02</span><small>GROUP COMPANY</small></div>
               <div class="company-main">
                 <p class="company-field">INDUSTRIAL COATING / FINISHING</p>
-                <h3>伸晃工業<br />株式会社</h3>
-                <p>色と質感、その先の品質へ。</p>
+                <h3><span class="company-name company-name-short">伸晃工業株式会社</span></h3>
+                <p><span class="phrase">色と質感、</span><wbr /><span class="phrase">その先の品質へ。</span></p>
               </div>
               <div class="company-meta">
-                <p>金属・樹脂など多様な素材に向き合う工業塗装。製品の価値を仕上げる専門会社です。</p>
+                <p><span class="phrase">金属・樹脂など</span><wbr /><span class="phrase">多様な素材に向き合う工業塗装。</span><wbr /><span class="phrase">製品の価値を仕上げる</span><wbr /><span class="phrase">専門会社です。</span></p>
                 <a href="https://makoban.github.io/shinko-kogyo-site/" target="_blank" rel="noopener noreferrer">サイト提案を見る <span aria-hidden="true">↗</span></a>
               </div>
               <div class="company-symbol symbol-shinko" aria-hidden="true"><i></i><i></i><i></i></div>
@@ -347,11 +351,11 @@
               <div class="company-index"><span>03</span><small>GROUP COMPANY</small></div>
               <div class="company-main">
                 <p class="company-field">TELECOMMUNICATIONS / NETWORK</p>
-                <h3>有限会社<br />アイ・ティー・ネット</h3>
-                <p>見えないところまで、つながりを設計する。</p>
+                <h3><span class="company-name company-name-long">有限会社アイ・ティー・ネット</span></h3>
+                <p><span class="phrase">見えないところまで、</span><wbr /><span class="phrase">つながりを設計する。</span></p>
               </div>
               <div class="company-meta">
-                <p>アンテナ、防犯、LAN・ネットワークなど。暮らしと仕事の通信環境を支える専門会社です。</p>
+                <p><span class="phrase">アンテナ、防犯、</span><wbr /><span class="phrase keep">LAN・ネットワークなど。</span><wbr /><span class="phrase">暮らしと仕事の通信環境を支える</span><wbr /><span class="phrase">専門会社です。</span></p>
                 <a href="https://makoban.github.io/it-network-renewal/" target="_blank" rel="noopener noreferrer">サイト提案を見る <span aria-hidden="true">↗</span></a>
               </div>
               <div class="company-symbol symbol-itn" aria-hidden="true"><i></i><i></i><i></i></div>
@@ -363,22 +367,26 @@
       <section class="vision section" id="vision" aria-labelledby="vision-title">
         <div class="vision-media media-curtain reveal">
           <picture>
-            <source type="image/avif" srcset="assets/images/materials.avif" />
-            <source type="image/webp" srcset="assets/images/materials.webp" />
+            <source type="image/avif" srcset="assets/images/materials-640.avif 640w, assets/images/materials.avif 1536w" sizes="(max-width: 767px) 100vw, 100vw" />
+            <source type="image/webp" srcset="assets/images/materials-640.webp 640w, assets/images/materials.webp 1536w" sizes="(max-width: 767px) 100vw, 100vw" />
             <img
               src="assets/images/materials.jpg"
+              srcset="assets/images/materials-640.jpg 640w, assets/images/materials.jpg 1536w"
+              sizes="100vw"
               width="1536"
               height="1024"
               loading="lazy"
+              decoding="async"
               alt="塗装材、工業部品、通信図、生活用品を囲み、異なる専門性をつなぐイメージ"
             />
           </picture>
           <p class="image-note">グループの連携を表現した生成イメージです</p>
+          <button class="media-zoom" type="button" data-image-zoom data-image-src="assets/images/materials.jpg" data-image-alt="塗装材、工業部品、通信図、生活用品を囲み、異なる専門性をつなぐイメージ" data-image-caption="グループの連携を表現した生成イメージ"><span>画像を拡大</span><i aria-hidden="true">+</i></button>
         </div>
         <div class="vision-card reveal">
           <p class="eyebrow"><span></span>OUR VISION</p>
-          <h2 id="vision-title"><span>一社の成長だけでなく、</span><span>技術と人が続く未来へ。</span></h2>
-          <p>現場で磨かれた技術には、まだ多くの可能性があります。会社の垣根を越えて知恵をつなぎ、働く人が誇りを持てる仕事を、次の世代へ残していく。それが私たちの目指すグループの姿です。</p>
+          <h2 id="vision-title"><span class="phrase-line">一社の成長だけでなく、</span><span class="phrase-line">技術と人が続く未来へ。</span></h2>
+          <p><span class="phrase">現場で磨かれた技術には、</span><wbr /><span class="phrase">まだ多くの可能性があります。</span><wbr /><span class="phrase">会社の垣根を越えて知恵をつなぎ、</span><wbr /><span class="phrase">働く人が誇りを持てる仕事を</span><wbr /><span class="phrase">次の世代へ残していく。</span><wbr /><span class="phrase">それが私たちの目指す</span><wbr /><span class="phrase">グループの姿です。</span></p>
           <a class="text-link text-link-dark" href="#company">会社情報を見る <span aria-hidden="true">↓</span></a>
         </div>
       </section>
@@ -390,7 +398,7 @@
               <p class="eyebrow"><span></span>COMPANY</p>
               <p class="section-number">05</p>
             </div>
-            <div><h2 id="company-title" class="display-title reveal"><span>会社情報</span></h2></div>
+            <div><h2 id="company-title" class="display-title reveal"><span class="phrase-line">会社情報</span></h2></div>
           </div>
 
           <div class="profile-grid">
@@ -401,17 +409,17 @@
               <p>現場にある可能性を、事業へ。</p>
             </div>
             <dl class="profile-table reveal">
-              <div><dt>会社名</dt><dd>エス・プランニング株式会社</dd></div>
-              <div><dt>代表者</dt><dd>代表取締役　齊藤 史規</dd></div>
-              <div><dt>創業</dt><dd>2007年</dd></div>
-              <div><dt>所在地</dt><dd>〒236-0023<br />神奈川県横浜市金沢区平潟町7番25号 岡田ビル1F</dd></div>
+              <div><dt>会社名</dt><dd><span class="keep">エス・プランニング株式会社</span></dd></div>
+              <div><dt>代表者</dt><dd><span class="keep">代表取締役　齊藤 史規</span></dd></div>
+              <div><dt>創業</dt><dd><span class="keep">2007年</span></dd></div>
+              <div><dt>所在地</dt><dd><span class="phrase-line keep">〒236-0023</span><span class="phrase">神奈川県横浜市金沢区</span><wbr /><span class="phrase">平潟町7番25号</span><wbr /><span class="phrase keep">岡田ビル1F</span></dd></div>
               <div><dt>電話</dt><dd><a href="tel:0453494672">045-349-4672</a></dd></div>
-              <div><dt>事業領域</dt><dd>船舶・鉄道分野の製造支援、溶接、電気、塗装、小売事業</dd></div>
-              <div><dt>グループ会社</dt><dd>有限会社青竜社塗装店<br />伸晃工業株式会社<br />有限会社アイ・ティー・ネット</dd></div>
-              <div><dt>運営事業</dt><dd>stockmart（食品・生活雑貨小売）</dd></div>
+              <div><dt>事業領域</dt><dd><span class="phrase">船舶・鉄道分野の製造支援、</span><wbr /><span class="phrase">溶接、電気、塗装、小売事業</span></dd></div>
+              <div><dt>グループ会社</dt><dd><span class="phrase-line keep">有限会社青竜社塗装店</span><span class="phrase-line keep">伸晃工業株式会社</span><span class="phrase-line keep">有限会社アイ・ティー・ネット</span></dd></div>
+              <div><dt>運営事業</dt><dd><span class="keep">stockmart（食品・生活雑貨小売）</span></dd></div>
             </dl>
           </div>
-          <p class="fact-note reveal">※ 会社情報は支給名刺および公開情報をもとにしたリニューアル提案用の掲載内容です。正式公開前に最終確認を行います。</p>
+          <p class="fact-note reveal"><span class="phrase">※ 会社情報は支給名刺および</span><wbr /><span class="phrase">公開情報をもとにした</span><wbr /><span class="phrase">リニューアル提案用の掲載内容です。</span><wbr /><span class="phrase">正式公開前に最終確認を行います。</span></p>
         </div>
       </section>
 
@@ -421,8 +429,8 @@
         <div class="shell contact-grid">
           <div class="contact-copy reveal">
             <p class="eyebrow eyebrow-light"><span></span>CONTACT</p>
-            <h2 id="contact-title"><span>次の可能性を、</span><span>一緒にひらく。</span></h2>
-            <p>事業やグループに関するご相談はこちらから。内容を確認のうえ、担当者よりご案内します。</p>
+            <h2 id="contact-title"><span class="phrase-line">次の可能性を、</span><span class="phrase-line">一緒にひらく。</span></h2>
+            <p><span class="phrase">事業やグループに関するご相談は</span><wbr /><span class="phrase">こちらから。</span><wbr /><span class="phrase">内容を確認のうえ、</span><wbr /><span class="phrase">担当者よりご案内します。</span></p>
             <div class="contact-phone"><small>OFFICE</small><a href="tel:0453494672">045-349-4672</a><span>受付時間は正式公開前にご確認ください</span></div>
           </div>
 
@@ -462,7 +470,7 @@
         </div>
       </div>
       <div class="shell footer-bottom">
-        <p>RENEWAL DESIGN PREVIEW — 検索非表示・お問い合わせ送信停止</p>
+        <p><span class="phrase">RENEWAL DESIGN PREVIEW</span><wbr /><span class="phrase"> — 検索非表示・お問い合わせ送信停止</span></p>
         <p>© <span data-year>2026</span> S.PLANNING CO., LTD.</p>
       </div>
     </footer>
@@ -470,9 +478,17 @@
     <dialog class="demo-dialog" id="demo-dialog">
       <button type="button" class="dialog-close" aria-label="閉じる" data-dialog-close>×</button>
       <p class="eyebrow"><span></span>PREVIEW NOTICE</p>
-      <h2>このフォームは、<br />リニューアル提案用です。</h2>
-      <p>入力内容は保存・送信されません。正式公開時に送信先、個人情報保護方針、受付フローを設定します。</p>
+      <h2><span class="phrase-line">このフォームは、</span><span class="phrase-line">リニューアル提案用です。</span></h2>
+      <p><span class="phrase">入力内容は保存・送信されません。</span><wbr /><span class="phrase">正式公開時に送信先、</span><wbr /><span class="phrase">個人情報保護方針と、</span><wbr /><span class="phrase">受付フローを設定します。</span></p>
       <button type="button" class="button button-dark" data-dialog-close><span>確認しました</span><i aria-hidden="true">✓</i></button>
+    </dialog>
+
+    <dialog class="image-dialog" id="image-dialog" aria-labelledby="image-dialog-caption">
+      <button type="button" class="dialog-close image-dialog-close" aria-label="拡大画像を閉じる" data-image-dialog-close>×</button>
+      <figure>
+        <img src="assets/images/stockmart-640.jpg" alt="stockmartの事業コンセプトイメージ" width="1536" height="1024" decoding="async" data-image-dialog-image />
+        <figcaption id="image-dialog-caption" data-image-dialog-caption></figcaption>
+      </figure>
     </dialog>
   </body>
 </html>
