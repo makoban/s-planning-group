@@ -73,7 +73,8 @@ for (const width of widths) {
           .map((rect) => Math.round(rect.top));
         const uniqueLines = [...new Set(lineTops)];
         const rect = element.getBoundingClientRect();
-        const outsideViewport = rect.left < -1 || rect.right > doc.clientWidth + 1;
+        const insideIntentionalRail = Boolean(element.closest(".site-preview-rail"));
+        const outsideViewport = !insideIntentionalRail && (rect.left < -1 || rect.right > doc.clientWidth + 1);
         const internalOverflow = element.scrollWidth > element.clientWidth + 1;
         return {
           text: element.textContent.trim(),
@@ -122,6 +123,9 @@ for (const width of widths) {
       legacyLoaderPieces: document.querySelectorAll(".loader-piece").length,
       noindex: document.querySelector('meta[name="robots"]')?.content || "",
       imageFormats: [...new Set(allImages.map((image) => image.currentSrc.split(".").pop()))],
+      companyVisualCount: document.querySelectorAll(".company-card .company-image-button img").length,
+      sitePreviewCount: document.querySelectorAll(".site-preview-card").length,
+      zoomControlCount: document.querySelectorAll('[data-image-zoom][aria-controls="image-dialog"][aria-haspopup="dialog"]').length,
       resources,
     };
   });
@@ -146,12 +150,16 @@ for (const width of widths) {
     report.failures.push(`${width}px: logo sources are not unified ${JSON.stringify(metrics.logoSources)}`);
   }
   if (metrics.legacyLoaderPieces !== 0) report.failures.push(`${width}px: legacy loader logo pieces remain`);
+  if (metrics.companyVisualCount !== 3 || metrics.sitePreviewCount !== 3) {
+    report.failures.push(`${width}px: company visual structure is incomplete`);
+  }
+  if (metrics.zoomControlCount !== 8) report.failures.push(`${width}px: zoom controls are incomplete (${metrics.zoomControlCount})`);
   if (consoleErrors.length || pageErrors.length) report.failures.push(`${width}px: browser errors`);
   if (metrics.hiddenReveals !== 0) report.failures.push(`${width}px: ${metrics.hiddenReveals} reveal elements stayed hidden`);
 
   if ([320, 375, 390, 430, 1440].includes(width)) {
     await page.screenshot({ path: path.join(outputDir, `full-${width}.jpg`), type: "jpeg", quality: 76, fullPage: true });
-    for (const selector of ["#top", "#group", "#stockmart", "#companies", "#contact"]) {
+    for (const selector of ["#top", "#group", "#stockmart", "#companies", "#company", "#contact"]) {
       const element = page.locator(selector);
       await element.scrollIntoViewIfNeeded();
       await page.waitForTimeout(100);
@@ -184,6 +192,42 @@ for (const width of widths) {
     if (!imageDialogOpen || !imageDialogClosed || imageDialogSource !== "assets/images/stockmart.jpg") {
       report.failures.push("image dialog interaction failed");
     }
+
+    await page.locator("#companies").scrollIntoViewIfNeeded();
+    const companyImageButton = page.locator(".company-card .company-image-button").first();
+    await companyImageButton.click();
+    const companyImageDialog = await page.locator("#image-dialog").evaluate((element) => ({
+      open: element.open,
+      source: element.querySelector("[data-image-dialog-image]")?.getAttribute("src"),
+    }));
+    await page.locator("[data-image-dialog-close]").click();
+    const companyFocusReturned = await companyImageButton.evaluate((element) => document.activeElement === element);
+
+    const screenshotButton = page.locator(".site-preview-screen").first();
+    await screenshotButton.scrollIntoViewIfNeeded();
+    await screenshotButton.click();
+    const screenshotDialog = await page.locator("#image-dialog").evaluate((element) => ({
+      open: element.open,
+      screenshotMode: element.classList.contains("is-screenshot"),
+      source: element.querySelector("[data-image-dialog-image]")?.getAttribute("src"),
+    }));
+    await page.locator("[data-image-dialog-image]").click();
+    const screenshotZoomed = await page.locator("#image-dialog").evaluate((element) => element.classList.contains("is-zoomed"));
+    await page.locator("[data-image-dialog-close]").click();
+    const screenshotFocusReturned = await screenshotButton.evaluate((element) => document.activeElement === element);
+    report.interaction.companyVisuals = { companyImageDialog, companyFocusReturned, screenshotDialog, screenshotZoomed, screenshotFocusReturned };
+    if (
+      !companyImageDialog.open ||
+      companyImageDialog.source !== "assets/images/company-seiryu.webp" ||
+      !companyFocusReturned ||
+      !screenshotDialog.open ||
+      !screenshotDialog.screenshotMode ||
+      screenshotDialog.source !== "assets/images/group-site-seiryu.webp" ||
+      !screenshotZoomed ||
+      !screenshotFocusReturned
+    ) {
+      report.failures.push("company visual interactions failed");
+    }
   }
 
   if (width === 1440) {
@@ -212,8 +256,17 @@ report.reducedMotion = await reducedPage.evaluate(() => ({
   hiddenReveals: [...document.querySelectorAll(".reveal")].filter((item) => getComputedStyle(item).opacity === "0").length,
   heroTransform: getComputedStyle(document.querySelector(".hero-media")).transform,
   scrollBehavior: getComputedStyle(document.documentElement).scrollBehavior,
+  sitePreviewOpacity: getComputedStyle(document.querySelector(".site-preview-card")).opacity,
+  motionTransform: getComputedStyle(document.querySelector("[data-scroll-motion]")).transform,
+  tiltX: getComputedStyle(document.querySelector(".company-image-button")).getPropertyValue("--tilt-x").trim(),
 }));
-if (report.reducedMotion.loaderDisplay !== "none" || report.reducedMotion.hiddenReveals !== 0) {
+if (
+  report.reducedMotion.loaderDisplay !== "none" ||
+  report.reducedMotion.hiddenReveals !== 0 ||
+  report.reducedMotion.sitePreviewOpacity !== "1" ||
+  report.reducedMotion.motionTransform !== "none" ||
+  report.reducedMotion.tiltX !== "0deg"
+) {
   report.failures.push("reduced-motion final state failed");
 }
 await reducedPage.close();

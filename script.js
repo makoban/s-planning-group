@@ -3,6 +3,7 @@
 
   const body = document.body;
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
   const markLoaded = () => body.classList.add("is-loaded");
   if (reducedMotion) {
@@ -15,17 +16,28 @@
   const header = document.querySelector("[data-header]");
   const progressBar = document.querySelector(".scroll-progress span");
   const heroImage = document.querySelector("[data-parallax] img");
+  const motionPictures = [...document.querySelectorAll("[data-scroll-motion]")];
 
   let ticking = false;
   const updateScrollState = () => {
     const scrollY = window.scrollY;
     const scrollMax = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
     header?.classList.toggle("is-scrolled", scrollY > 24);
-    if (progressBar) progressBar.style.width = `${Math.min((scrollY / scrollMax) * 100, 100)}%`;
+    if (progressBar) progressBar.style.transform = `scaleX(${Math.min(scrollY / scrollMax, 1)})`;
 
-    if (heroImage && !reducedMotion && window.matchMedia("(pointer: fine)").matches) {
+    if (heroImage && !reducedMotion && finePointer) {
       const offset = Math.min(scrollY * 0.035, 12);
       heroImage.style.transform = `translate3d(0, ${offset}px, 0) scale(1.015)`;
+    }
+
+    if (!reducedMotion && finePointer) {
+      motionPictures.forEach((picture) => {
+        const rect = picture.getBoundingClientRect();
+        if (rect.bottom < -120 || rect.top > window.innerHeight + 120) return;
+        const distance = window.innerHeight / 2 - (rect.top + rect.height / 2);
+        const progress = Math.max(-1, Math.min(1, distance / Math.max(window.innerHeight / 2, 1)));
+        picture.style.setProperty("--motion-y", `${(progress * 9).toFixed(2)}px`);
+      });
     }
     ticking = false;
   };
@@ -41,6 +53,31 @@
     { passive: true }
   );
   updateScrollState();
+
+  if (!reducedMotion && finePointer) {
+    document.querySelectorAll("[data-tilt]").forEach((surface) => {
+      const target = surface.querySelector(".company-image-button");
+      if (!(target instanceof HTMLElement)) return;
+      let tiltFrame = 0;
+
+      surface.addEventListener("pointermove", (event) => {
+        if (tiltFrame) window.cancelAnimationFrame(tiltFrame);
+        tiltFrame = window.requestAnimationFrame(() => {
+          const rect = surface.getBoundingClientRect();
+          const x = ((event.clientX - rect.left) / Math.max(rect.width, 1) - 0.5) * 2;
+          const y = ((event.clientY - rect.top) / Math.max(rect.height, 1) - 0.5) * 2;
+          target.style.setProperty("--tilt-x", `${(-y * 1.15).toFixed(2)}deg`);
+          target.style.setProperty("--tilt-y", `${(x * 1.15).toFixed(2)}deg`);
+        });
+      });
+
+      surface.addEventListener("pointerleave", () => {
+        if (tiltFrame) window.cancelAnimationFrame(tiltFrame);
+        target.style.setProperty("--tilt-x", "0deg");
+        target.style.setProperty("--tilt-y", "0deg");
+      });
+    });
+  }
 
   const menuButton = document.querySelector(".menu-button");
   const mobileMenu = document.querySelector(".mobile-menu");
@@ -222,6 +259,7 @@
   const imageDialogImage = document.querySelector("[data-image-dialog-image]");
   const imageDialogCaption = document.querySelector("[data-image-dialog-caption]");
   const imageDialogClose = document.querySelector("[data-image-dialog-close]");
+  const imageDialogFigure = imageDialog?.querySelector("figure");
   let imageDialogTrigger = null;
 
   document.querySelectorAll("[data-image-zoom]").forEach((trigger) => {
@@ -231,15 +269,32 @@
       imageDialogImage.src = trigger.dataset.imageSrc || "";
       imageDialogImage.alt = trigger.dataset.imageAlt || "";
       if (imageDialogCaption) imageDialogCaption.textContent = trigger.dataset.imageCaption || "";
+      imageDialog.classList.toggle("is-screenshot", trigger.dataset.imageKind === "screenshot");
+      imageDialog.classList.remove("is-zoomed");
+      if (imageDialogFigure) {
+        imageDialogFigure.scrollTop = 0;
+        imageDialogFigure.scrollLeft = 0;
+      }
       imageDialog.showModal();
     });
+  });
+
+  imageDialogImage?.addEventListener("click", () => {
+    if (!imageDialog?.classList.contains("is-screenshot")) return;
+    imageDialog.classList.toggle("is-zoomed");
+    if (!imageDialog.classList.contains("is-zoomed") && imageDialogFigure) {
+      imageDialogFigure.scrollTo({ top: 0, left: 0, behavior: reducedMotion ? "auto" : "smooth" });
+    }
   });
 
   imageDialogClose?.addEventListener("click", () => imageDialog?.close());
   imageDialog?.addEventListener("click", (event) => {
     if (event.target === imageDialog) imageDialog.close();
   });
-  imageDialog?.addEventListener("close", () => imageDialogTrigger?.focus());
+  imageDialog?.addEventListener("close", () => {
+    imageDialog.classList.remove("is-screenshot", "is-zoomed");
+    imageDialogTrigger?.focus();
+  });
 
   document.querySelectorAll("[data-year]").forEach((item) => {
     item.textContent = String(new Date().getFullYear());
